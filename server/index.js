@@ -33,7 +33,8 @@ io.on("connection", (socket) => {
 
   socket.emit("confirmation", "connected!");
 
-  socket.on("event", (data) => {
+  socket.on("order", (data) => {
+    console.log('order', data);
     console.log(socket.id, data);
     socket.emit("event", "pong");
   });
