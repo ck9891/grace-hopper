@@ -64,10 +64,12 @@ html, body {
   gap: var(--spacing-lg);
 }
 
-p, button {
+p, button, a {
   font-size: var(--font-size-regular);
   font-weight: var(--font-weight-semibold);
   font-family: var(--font-semibold);
+  text-decoration: none;
+  display: block;
 }
 
 label {
@@ -246,6 +248,50 @@ text-align: center;
   font-family: var(--font-semibold-italic);
 }
 
+/* Order Confirmation */
+.order-confirmation {
+  background: var(--light-green);
+  width: 100vw; 
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-confirmation .message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.order-confirmation h1 {
+  font-size: 3rem;
+  font-family: var(--font-regular);
+  text-align: center;
+  font-weight: 400;
+  margin: 1rem 0;
+}
+
+.order-confirmation img {
+  width: 300px;
+  height: auto;
+  margin-top: var(--spacing-md);
+  margin-left: var(--spacing-md);
+}
+
+.order-confirmation svg {
+  max-height: 255px;
+  width: auto;
+}
+
+.lead {
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 1rem;
+}
+
 @media screen and (min-width: 1168px) {
 
   main {
@@ -288,6 +334,14 @@ text-align: center;
 
   .title-section p {
     text-align: left;
+  }
+
+  .order-confirmation h1 {
+    font-size: 7rem;
+  }
+
+  .lead {
+    font-size: 3rem;
   }
 }
 
