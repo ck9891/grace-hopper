@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
   socket.on("order", (data) => {
     console.log('order', data);
     console.log(socket.id, data);
-    socket.emit("event", "pong");
+    io.emit("order", data);
   });
 });
 

@@ -1,0 +1,313 @@
+@font-face {
+  font-family: "TDGraphik-Medium";
+  src: url("./public/fonts/TDGraphik-Medium.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TDGraphik-Regular";
+  src: url("./public/fonts/TDGraphik-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TDGraphik-Semibold";
+  src: url("./public/fonts/TDGraphik-Semibold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TDGraphik-Semibold-Italic";
+  src: url("./public/fonts/TDGraphik-Semibold-Italic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+:root {
+  --spacing-lg: 2rem;
+  --spacing-md: 1rem;
+  --spacing-sm: 0.5rem;
+  /* fonts */
+  --font-size-regular: 1.25rem;
+  --font-weight-semibold: 600;
+  --font-regular: "TDGraphik-Regular";
+  --font-semibold: "TDGraphik-Medium";
+  --font-bold: "TDGraphik-Semibold";
+  --font-bold-italic: "TDGraphik-Semibold-Italic";
+  /* colours */
+  --light-orange: rgba(249, 229, 192, 1);
+  --orange: rgba(255, 149, 0, 1);
+  --grey-fill: rgba(247, 247, 247, 1);
+  --grey-border: rgba(204, 204, 204, 1);
+  --light-green: rgba(229, 241, 212, 1);
+  --td-green: #00b624;
+  --off-white: rgba(249, 249, 249, 1);
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
+  /* min-height: 100vh; */
+  gap: var(--spacing-lg);
+}
+
+p, button {
+  font-size: var(--font-size-regular);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-semibold);
+}
+
+label {
+  font-family: var(--font-regular);
+}
+
+.order-form {
+  background: var(--light-orange);
+  padding: var(--spacing-sm);
+  /* width: 100%; */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group-label {
+  display: flex;
+  align-items: center;
+}
+
+.number {
+  font-size: var(--font-size-regular);
+  font-weight: var(--font-weight-semibold);
+  /* margin-right: var(--spacing-sm); */
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: var(--font-weight-semibold);
+  color: #fff;
+  background: var(--td-green);
+  font-family: var(--font-semibold);
+}
+
+.form-control {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  /* start in 2nd column */
+  grid-column-start: 2;
+}
+
+.form-control .text-input {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.form-control .text-input input[type="text"] {
+  border: 1px solid var(--grey-border);
+  background: var(--grey-fill);
+  padding: 0.5rem;
+  font-size: var(--font-size-regular);
+  width: 250px;
+}
+
+.form-control .text-input input[type="email"] {
+  border: 1px solid var(--grey-border);
+  background: var(--grey-fill);
+  padding: 0.5rem;
+  font-size: var(--font-size-regular);
+  width: 100%;
+}
+
+.form-control.radio-group {
+  display: grid;
+  grid-template-columns: repeat(2, 140px);
+  justify-content: start;
+  gap: var(--spacing-sm);
+}
+
+.form-control.radio-group label {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: start;
+  font-size: var(--font-size-medium);
+  gap: var(--spacing-sm);
+}
+
+input[type="radio"] {
+  box-sizing: border-box;
+  appearance: none;
+  background: var(--grey-fill);
+  /* outline: 1px solid var(--grey-border); */
+  border: 1px solid var(--grey-border);
+  width: var(--font-size-regular);
+  height: var(--font-size-regular);
+}
+
+input[type="radio"]:checked {
+  background: var(--td-green);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 40px auto;
+  gap: var(--spacing-sm) var(--spacing-sm);
+  align-items: center;
+}
+
+.btn {
+  display: block;
+  background: var(--orange);
+  color: #000;
+  border: none;
+  padding: 0.75rem 4.75rem;
+  font-size: var(--font-size-regular);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.order-form .btn {
+  margin-top: var(--spacing-lg);
+  margin-left: auto;
+}
+
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  height: 100%;
+  gap: var(--spacing-lg);
+}
+
+.title-section img {
+  width: 300px;
+  height: auto;
+}
+
+.title-section p {
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+/* wired component */
+
+.wired-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--light-green);
+}
+
+.wired-component svg {
+  height: 150px;
+  width: auto;
+}
+
+.wired-component h1 {
+  font-size: 3rem;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-semibold);
+  margin-top: 0;
+  margin-bottom: 0;
+text-align: center;
+}
+
+.wired-component h1 em {
+  font-family: var(--font-semibold-italic);
+}
+
+@media screen and (min-width: 1168px) {
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    /* flex-direction: row;
+    justify-content: space-between; */
+    grid-template-columns: 450px auto;
+    gap: 4rem;
+  }
+
+  .title-section {
+    justify-content: space-between;
+  }
+
+  .form-control .text-input input[type="email"] {
+    width: 350px;
+  } 
+
+  .form-control {
+    gap: var(--spacing-md);
+  }
+
+  .grid {
+    gap: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  .wired-component h1 {
+    font-size: 4rem;
+  }
+
+  .wired-component svg {
+    height: 190px;
+  }
+
+  .title-section p {
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .form-control.radio-group {
+    grid-template-columns: repeat(3, 180px);
+
+  }
+
+  .container {
+    display: grid;
+    padding: var(--spacing-lg);
+
+  }
+
+  .order-form {
+    padding: var(--spacing-lg);
+  }
+
+  .form-control.radio-group label {
+    font-size: var(--font-size-regular);
+  }
+}

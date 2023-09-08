@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction, LinksFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -8,16 +8,29 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import { useEffect, useState } from "react";
+import { cssBundleHref } from "@remix-run/css-bundle";
+
 import type { Socket } from "socket.io-client";
 import io from "socket.io-client";
+import stylesheet from "~/styles.css";
 
 import { SocketProvider } from "~/context";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Grace Hopperr Coffee Ordering",
   viewport: "width=device-width,initial-scale=1",
 });
+
+console.log({ stylesheet })
+
+export const links = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: "stylesheet", href: stylesheet },
+
+];
+
+console.log(links)
 
 export default function App() {
   const [socket, setSocket] = useState<Socket>();

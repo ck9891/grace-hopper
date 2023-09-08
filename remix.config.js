@@ -7,5 +7,5 @@ module.exports = {
   serverBuildDirectory: "server/build",
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
-  // publicPath: "/build/",
+  publicPath: "/build/",
 };
