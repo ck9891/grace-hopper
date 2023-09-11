@@ -24,14 +24,14 @@ const formDataSchema = z.object({
   temperature: z.enum(["hot", "iced"]),
   coffee: z.enum(["drip", "latte", "cappuccino", "espresso"]),
   milk: z.enum([
-    "whole-milk",
-    "skim-milk",
-    "soy-milk",
+    "whole milk",
+    "skim milk",
+    "soy milk",
     "almond",
     "oat",
-    "no-milk",
+    "no milk",
   ]),
-  syrup: z.enum(["vanilla", "caramel", "mocha", "no-syrup"]),
+  syrup: z.enum(["vanilla", "caramel", "mocha", "no syrup"]),
 });
 export async function action({ request }: ActionArgs) {
   try {
@@ -82,7 +82,7 @@ export default function Order() {
     socket.emit("order", data?.order);
   }, [socket, data?.order]);
 
-  if (!data?.order) {
+  if (data?.order) {
     return <OrderConfirmation orderNumber="abc123" />;
   }
 
@@ -197,7 +197,7 @@ export default function Order() {
                     type="radio"
                     name="milk"
                     id="wholeMilk"
-                    value="whole-milk"
+                    value="whole milk"
                   />
                 </label>
                 <label htmlFor="skimMilk">
@@ -206,7 +206,7 @@ export default function Order() {
                     type="radio"
                     name="milk"
                     id="skimMilk"
-                    value="skim-milk"
+                    value="skim milk"
                   />
                 </label>
                 <label htmlFor="soyMilk">
@@ -215,7 +215,7 @@ export default function Order() {
                     type="radio"
                     name="milk"
                     id="soyMilk"
-                    value="soy-milk"
+                    value="soy milk"
                   />
                 </label>
                 <label htmlFor="almond">
@@ -228,7 +228,7 @@ export default function Order() {
                 </label>
                 <label htmlFor="noMilk">
                   No Milk
-                  <input type="radio" name="milk" id="noMilk" value="no-milk" />
+                  <input type="radio" name="milk" id="noMilk" value="no milk" />
                 </label>
                 {data?.validationErrors?.milk && (
                   <p>{data?.validationErrors?.milk[0]}</p>
@@ -269,7 +269,7 @@ export default function Order() {
                     type="radio"
                     name="syrup"
                     id="noSyrup"
-                    value="no-syrup"
+                    value="no syrup"
                   />
                 </label>
                 {data?.validationErrors?.syrup && (
