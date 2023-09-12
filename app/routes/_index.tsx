@@ -1,8 +1,18 @@
-import { Link } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 import React from "react";
 import TDLogo from "~/components/TDLogo";
+import { getUserId } from "~/session.server";
+
+export const loader = async ({ request }) => {
+  const userId = await getUserId(request);
+  console.log(userId)
+  return json({ userId });
+};
 
 function Index() {
+  const { userId } = useLoaderData();
+  console.log(userId)
   return (
     <div className="index">
       <TDLogo />
@@ -55,19 +65,29 @@ function Index() {
           />
         </svg>
         <div className="link-section">
-          <Link to="/login" className="btn btn--green">
-            Login
-          </Link>
-          <Link to="/order" className="btn btn--green">
-            Order Coffee
-          </Link>
-          <Link to="/orders" className="btn">
-            View Orders
-          </Link>
-
-          <Link to="/admin" className="btn">
-            Admin
-          </Link>
+          {!userId ? (
+            <>
+              <Link to="/login" className="btn btn--green">
+                Login
+              </Link>
+              <Link to="/order" className="btn btn--green">
+                Order Coffee
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/admin" className="btn">
+                Admin
+              </Link>
+              <Link to="/order" className="btn btn--green">
+                Order Coffee
+              </Link>
+              <Link to="/orders" className="btn">
+                View Orders
+              </Link>
+            </>
+          )}
+          
         </div>
       </main>
     </div>

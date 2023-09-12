@@ -118,16 +118,17 @@ export default function Order() {
                   Name
                   <input type="text" name="name" id="name" />
                   {data?.validationErrors?.name && (
-                    <p>{data?.validationErrors?.name[0]}</p>
+                    <p className="error">{data?.validationErrors?.name[0]}</p>
                   )}
                 </label>
                 <label className="text-input" htmlFor="email">
                   Email
                   <input type="email" name="email" id="email" />
                   {data?.validationErrors?.email && (
-                    <p>{data?.validationErrors?.email[0]}</p>
+                    <p className="error">{data?.validationErrors?.email[0]}</p>
                   )}
                 </label>
+                
               </div>
             </div>
           </div>
@@ -152,10 +153,11 @@ export default function Order() {
                     value="iced"
                   />
                 </label>
-                {data?.validationErrors?.temperature && (
-                  <p>{data?.validationErrors?.temperature[0]}</p>
-                )}
+                
               </div>
+              {data?.validationErrors?.temperature && (
+                  <p className="error" >{data?.validationErrors?.temperature[0].split('|').toString()}</p>
+                )}
             </div>
           </div>
           {/* customize coffee: Drip Cofee, Latte, Cappucino, Espresso Shot */}
@@ -190,10 +192,11 @@ export default function Order() {
                     value="espresso"
                   />
                 </label>
-                {data?.validationErrors?.coffee && (
-                  <p>{data?.validationErrors?.coffee[0]}</p>
-                )}
+                
               </div>
+              {data?.validationErrors?.coffee && (
+                  <p className="error">{data?.validationErrors?.coffee[0].split('|').toString()}</p>
+                )}
             </div>
           </div>
           {/* get milk options */}
@@ -240,10 +243,11 @@ export default function Order() {
                   No Milk
                   <input type="radio" name="milk" id="noMilk" value="no milk" />
                 </label>
-                {data?.validationErrors?.milk && (
-                  <p>{data?.validationErrors?.milk[0]}</p>
-                )}
+                
               </div>
+              {data?.validationErrors?.milk && (
+                  <p className="error">{data?.validationErrors?.milk[0].split('|').toString()}</p>
+                )}
             </div>
           </div>
           {/* get syrup options */}
@@ -282,10 +286,11 @@ export default function Order() {
                     value="no syrup"
                   />
                 </label>
-                {data?.validationErrors?.syrup && (
-                  <p>{data?.validationErrors?.syrup[0]}</p>
-                )}
+                
               </div>
+              {data?.validationErrors?.syrup && (
+                  <p className="error">{data?.validationErrors?.syrup[0].split('|').toString()}</p>
+                )}
             </div>
           </div>
           <input type="submit" value="Submit" className="btn" />

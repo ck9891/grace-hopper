@@ -10,6 +10,8 @@ const env = { ...process.env }
     await exec('npx prisma migrate deploy')
   }
 
+  await exec('npx prisma generate')
+
   // launch application
   await exec(process.argv.slice(2).join(' '))
 })()

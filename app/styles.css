@@ -69,10 +69,9 @@ h1, h2, h3, h4, h5, h6 {
   gap: var(--spacing-lg);
 }
 
-p, button, a {
+p, button, a, li {
   font-size: var(--font-size-regular);
-  font-weight: var(--font-weight-semibold);
-  font-family: var(--font-semibold);
+  font-family: var(--font-regular);
   text-decoration: none;
   display: block;
 }
@@ -81,11 +80,30 @@ label {
   font-family: var(--font-regular);
 }
 
+.logo {
+  width: 200px;
+  height: auto;
+  margin-top: var(--spacing-sm); 
+  margin-left: var(--spacing-sm);
+}
+
+
 .order-form {
   background: var(--light-orange);
   padding: var(--spacing-sm);
   /* width: 100%; */
 }
+
+.order-form .error {
+  color: red;
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-semibold);
+  margin-bottom: 0;
+  margin-top: 0;
+  grid-column-start: 2;
+}
+
 
 .form-group {
   display: flex;
@@ -127,6 +145,7 @@ label {
 .form-control .text-input {
   display: flex;
   flex-direction: column-reverse;
+  gap: var(--spacing-sm);
 }
 
 .form-control .text-input input[type="text"] {
@@ -218,11 +237,6 @@ input[type="radio"]:checked {
   gap: var(--spacing-lg);
 }
 
-.title-section img {
-  width: 300px;
-  height: auto;
-}
-
 .title-section p {
   margin-top: 0;
   margin-bottom: var(--spacing-lg);
@@ -285,8 +299,7 @@ text-align: center;
 }
 
 .order-confirmation img {
-  width: 300px;
-  height: auto;
+  
   margin-top: var(--spacing-md);
   margin-left: var(--spacing-md);
 }
@@ -435,6 +448,11 @@ text-align: center;
   min-height: 100vh;
 }
 
+.index .logo {
+  margin-top: var(--spacing-sm);
+  margin-left: var(--spacing-sm);
+}
+
 .index .main-content svg {
   height: 200px;
   width: auto;
@@ -457,7 +475,9 @@ text-align: center;
 }
 
 @media screen and (min-width: 1168px) {
-
+  .logo {
+    width: 300px;
+  }
   main {
     display: flex;
     justify-content: center;

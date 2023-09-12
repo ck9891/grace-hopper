@@ -18,9 +18,9 @@ export const action = async ({ request }) => {
   return json({ usersDeleted, ordersDeleted });
 };
 
-export const loader = async ({request}) => {
+export const loader = async ({ request }) => {
   await requireUser(request);
-  
+
   const stats = await Promise.all([getOrderCount(), getUserCount()]);
 
   return json({ stats });
@@ -45,12 +45,22 @@ function Admin() {
             <p>{data.stats[1]}</p>
           </div> */}
         </div>
-        <a href="/get-users" className="btn">Download Users</a>
+        <a href="/get-users" className="btn">
+          Download Users
+        </a>
         <Form method="post">
           <input type="hidden" name="form" value="deleteAllOrders" />
-          <button type="submit" className="btn">Delete Orders</button>
+          <button type="submit" className="btn">
+            Delete Orders
+          </button>
           {actionData?.ordersDeleted && <p>Deleted all Orders</p>}
         </Form>
+        <Link to="/order" className="btn btn--green">
+          Order Coffee
+        </Link>
+        <Link to="/orders" className="btn">
+          View Orders
+        </Link>
       </main>
     );
   }
