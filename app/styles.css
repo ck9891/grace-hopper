@@ -299,6 +299,7 @@ text-align: center;
   gap: var(--spacing-md);
   padding: var(--spacing-lg);
   background: var(--light-green);
+  min-height: 100vh;
 }
 
 .orders h1 {
