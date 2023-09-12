@@ -6,11 +6,14 @@ import type { ActionArgs } from "@remix-run/node";
 import { useLoaderData, useActionData, Form } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { json } from "@remix-run/node";
+import { motion } from "framer-motion";
 import { useSocket } from "~/context";
 import TDLogo from "~/components/TDLogo";
 import { getOrders, updateOrder } from "~/models/orders.server";
+import { requireUser } from "~/session.server";
 
-export const loader = async () => {
+export const loader = async ({request}) => {
+  await requireUser(request);
   // get orders from db
   const orders = await getOrders();
   return json({ existingOrders: orders });
@@ -60,13 +63,13 @@ export default function Order() {
   console.log({ orders });
 
   return (
-    <div className="orders">
+    <motion.div className="orders"  initial={{opacity: 0}} animate={{opacity: 1}}>
       <TDLogo />
       <h1>Current Orders</h1>
       <ul>
         {orders.length > 0 ? (
           orders.map((order) => (
-            <li key={order.id} className={order.complete ? `complete` : ''}>
+            <motion.li key={order.id} className={order.complete ? `complete` : ''} >
               <div className="order-for">
                 <p>
                   <strong>Order For:</strong> {order.name}
@@ -104,12 +107,12 @@ export default function Order() {
                   </Form>
                 ) : null}
               </div>
-            </li>
+            </motion.li>
           ))
         ) : (
           <li>No orders yet</li>
         )}
       </ul>
-    </div>
+    </motion.div>
   );
 }

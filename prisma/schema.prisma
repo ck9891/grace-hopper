@@ -28,7 +28,7 @@ model Password {
 }
 
 model Order {
-  id String @id @default(cuid())
+  id Int @id @default(autoincrement())
 
   createdAt DateTime @default(now())
 

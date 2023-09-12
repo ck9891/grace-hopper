@@ -1,9 +1,11 @@
 import { Link } from "@remix-run/react";
+import { motion } from "framer-motion";
 import TDLogo from "./TDLogo";
 
 function OrderConfirmation({ orderNumber }) {
   return (
-    <div className="order-confirmation">
+
+    <motion.div className="order-confirmation"  initial={{opacity: 0}} animate={{opacity: 1}}>
       <TDLogo />
       <div className="message">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 90">
@@ -57,7 +59,7 @@ function OrderConfirmation({ orderNumber }) {
         <p className="order-number">Order #: {orderNumber}</p>
         <Link to="/order" className="btn">Order Now</Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

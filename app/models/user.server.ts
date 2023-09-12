@@ -34,7 +34,7 @@ export async function deleteUserByEmail(email: User["email"]) {
 
 export async function verifyLogin(
   email: User["email"],
-  password: Password["hash"],
+  password: Password["hash"]
 ) {
   const userWithPassword = await prisma.user.findUnique({
     where: { email },
@@ -49,7 +49,7 @@ export async function verifyLogin(
 
   const isValid = await bcrypt.compare(
     password,
-    userWithPassword.password.hash,
+    userWithPassword.password.hash
   );
 
   if (!isValid) {
@@ -59,4 +59,28 @@ export async function verifyLogin(
   const { password: _password, ...userWithoutPassword } = userWithPassword;
 
   return userWithoutPassword;
+}
+
+export async function getUserCount() {
+  return prisma.user.count();
+}
+
+export async function getAllNonAdminUsers() {
+  return prisma.user.findMany({});
+}
+
+export async function deleteUsers() {
+  // delete users where email does not equal cameron.farquharson@td.com or claire.poirier@td.com
+  return prisma.user.deleteMany({
+    where: {
+      NOT: [
+        {
+          email: "cameron.farquharson@td.com",
+        },
+        {
+          email: "claire.poirier@td.com",
+        },
+      ],
+    },
+  });
 }

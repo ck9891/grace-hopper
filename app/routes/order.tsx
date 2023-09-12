@@ -8,10 +8,12 @@ import {
   useLoaderData,
   useActionData,
   Form,
+  useNavigate,
 } from "@remix-run/react";
 import { useEffect } from "react";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useSocket } from "~/context";
+import { motion } from "framer-motion";
 import OrderForm from "~/components/OrderForm";
 import { z, ZodError } from "zod";
 import WiredComponent from "~/components/WiredComponent";
@@ -74,6 +76,7 @@ export async function action({ request }: ActionArgs) {
 export default function Order() {
   const socket = useSocket();
   const data = useActionData();
+  const navigate = useNavigate();
   console.log({ data });
   useEffect(() => {
     if (!socket) return;
@@ -84,14 +87,17 @@ export default function Order() {
     });
 
     socket.emit("order", data?.order);
+    setTimeout(() => {
+      navigate("/order");
+    }, 10000);
   }, [socket, data?.order]);
 
   if (data?.order) {
-    return <OrderConfirmation orderNumber="abc123" />;
+    return <OrderConfirmation orderNumber={data?.order?.id} />;
   }
 
   return (
-    <main>
+    <motion.main initial={{opacity: 0}} animate={{opacity: 1}}>
       <div className="container">
         <section className="title-section">
           <TDLogo />
@@ -285,6 +291,6 @@ export default function Order() {
           <input type="submit" value="Submit" className="btn" />
         </Form>
       </div>
-    </main>
+    </motion.main>
   );
 }

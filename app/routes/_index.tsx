@@ -1,166 +1,77 @@
-import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
-import { Form, useActionData, useSearchParams } from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { Link } from "@remix-run/react";
+import React from "react";
 import TDLogo from "~/components/TDLogo";
 
-import { verifyLogin } from "~/models/user.server";
-import { createUserSession, getUserId } from "~/session.server";
-import { safeRedirect, validateEmail } from "~/utils";
-
-export const loader = async ({ request }: LoaderArgs) => {
-  const userId = await getUserId(request);
-  if (userId) return redirect("/orders");
-  return json({});
-};
-
-export const action = async ({ request }: ActionArgs) => {
-  const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/orders");
-  const remember = formData.get("remember");
-
-  if (!validateEmail(email)) {
-    return json(
-      { errors: { email: "Email is invalid", password: null } },
-      { status: 400 },
-    );
-  }
-
-  if (typeof password !== "string" || password.length === 0) {
-    return json(
-      { errors: { email: null, password: "Password is required" } },
-      { status: 400 },
-    );
-  }
-
-  if (password.length < 8) {
-    return json(
-      { errors: { email: null, password: "Password is too short" } },
-      { status: 400 },
-    );
-  }
-
-  const user = await verifyLogin(email, password);
-
-  if (!user) {
-    return json(
-      { errors: { email: "Invalid email or password", password: null } },
-      { status: 400 },
-    );
-  }
-
-  return createUserSession({
-    redirectTo,
-    remember: remember === "on" ? true : false,
-    request,
-    userId: user.id,
-  });
-};
-
-export const meta = () => { title: "Login" };
-
-export default function LoginPage() {
-  const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/orders";
-  const actionData = useActionData<typeof action>();
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (actionData?.errors?.email) {
-      emailRef.current?.focus();
-    } else if (actionData?.errors?.password) {
-      passwordRef.current?.focus();
-    }
-  }, [actionData]);
-
+function Index() {
   return (
-    <div className="login-page">
+    <div className="index">
       <TDLogo />
-      <h1>Coffee Portal</h1>
-        <Form method="post">
-          <div className="form-control">
-            
-            <div className="text-input">
-            <label
-              htmlFor="email"
-            >
-              Email address
-            </label>
-              <input
-                ref={emailRef}
-                id="email"
-                required
-                autoFocus={true}
-                name="email"
-                type="email"
-                autoComplete="email"
-                aria-invalid={actionData?.errors?.email ? true : undefined}
-                aria-describedby="email-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-              />
-              {actionData?.errors?.email ? (
-                <div className="pt-1 text-red-700" id="email-error">
-                  {actionData.errors.email}
-                </div>
-              ) : null}
-            </div>
+      <main className="main-content">
+        {" "}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 90">
+          <path
+            style={{ fill: "#fff" }}
+            d="M121.647 34.792h2.02l-4.03 39.74h-2.02l-1 9.86h-33.73l-1-9.86h-2.03l-4.03-39.74h2.03l-.96-9.41h-4.63l1.7-10.67h4.15l2.22-8.33h38.82l2.23 8.33h4.14l1.7 10.67h-4.63l-.95 9.41z"
+          />
+          <path
+            style={{ fill: "#00b624" }}
+            d="M81.989 17.391h38.669l-1.722-6.528H83.782l-1.793 6.528zM77.962 18.995l-.933 5.882h49.36l-1.004-5.882z"
+          />
+          <path
+            style={{
+              fill: "none",
+              stroke: "#1a5336",
+              strokeMiterlimit: 10,
+              strokeWidth: "3px",
+            }}
+            d="M124.249 16.209h-4.018l-2.224-8.322H81.49l-2.224 8.322h-4.018l-1.219 7.676h51.44l-1.22-7.676zM119.996 36.194l1.246-12.277H78.255l1.261 12.428M83.253 73.185l.985 9.709h31.021l1.008-9.938"
+          />
+          <path
+            style={{
+              fill: "none",
+              stroke: "#1a5336",
+              strokeMiterlimit: 10,
+              strokeWidth: "3px",
+            }}
+            d="m118.281 73.03 3.726-36.733H77.488l3.726 36.733h37.067z"
+          />
+          <path
+            style={{
+              fill: "#fff",
+              stroke: "#1a5336",
+              strokeMiterlimit: 10,
+              strokeWidth: "3px",
+            }}
+            d="M79.25 16.209h40.965"
+          />
+          <path
+            d="M104.642 36.297a5.058 5.058 0 0 1 5.058 5.058l-7.031 31.172"
+            style={{
+              fill: "none",
+              stroke: "#1a5336",
+              strokeLinejoin: "bevel",
+              strokeWidth: "3px",
+            }}
+          />
+        </svg>
+        <div className="link-section">
+          <Link to="/login" className="btn btn--green">
+            Login
+          </Link>
+          <Link to="/order" className="btn btn--green">
+            Order Coffee
+          </Link>
+          <Link to="/orders" className="btn">
+            View Orders
+          </Link>
 
-          
-            
-            <div className="text-input">
-              <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-              <input
-                id="password"
-                ref={passwordRef}
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                aria-invalid={actionData?.errors?.password ? true : undefined}
-                aria-describedby="password-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-              />
-              {actionData?.errors?.password ? (
-                <div className="pt-1 text-red-700" id="password-error">
-                  {actionData.errors.password}
-                </div>
-              ) : null}
-            </div>
-            </div>
-
-
-          <input type="hidden" name="redirectTo" value={redirectTo} />
-          <button
-            type="submit"
-            className="btn"
-          >
-            Log in
-          </button>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember"
-                name="remember"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-              />
-              <label
-                htmlFor="remember"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
-            </div>
-
-          </div>
-        </Form>
-      </div>
+          <Link to="/admin" className="btn">
+            Admin
+          </Link>
+        </div>
+      </main>
+    </div>
   );
 }
+
+export default Index;
