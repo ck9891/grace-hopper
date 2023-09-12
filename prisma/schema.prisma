@@ -26,3 +26,18 @@ model Password {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
 }
+
+model Order {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+
+  name String
+  email String
+  temperature String
+  coffee String
+  milk String
+  syrup String
+  complete Boolean @default(false)
+}
+

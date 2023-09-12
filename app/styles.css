@@ -54,6 +54,11 @@ html, body {
   box-sizing: border-box;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bold);
+
+}
+
 .container {
   display: block;
   flex-direction: column;
@@ -132,7 +137,7 @@ label {
   width: 250px;
 }
 
-.form-control .text-input input[type="email"] {
+.form-control .text-input input[type="email"], .form-control .text-input input[type="password"] {
   border: 1px solid var(--grey-border);
   background: var(--grey-fill);
   padding: 0.5rem;
@@ -326,6 +331,11 @@ text-align: center;
   border: 1px solid var(--grey-border);
 }
 
+.orders li.complete {
+  filter: grayscale(100%);
+  opacity: 0.65;
+}
+
 .orders li p {
   text-transform: capitalize;
   font-weight: 300;
@@ -339,14 +349,42 @@ text-align: center;
   margin-bottom: 0;
 }
 
+.orders .order-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+}
+
 .orders .order-details p {
   font-size: var(--font-size-md);
+  margin-top: 0;
 }
 
 .orders .order-details small {
   display: block;
   margin-top: var(--spacing-sm);
 }
+
+/* login page */
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--light-green);
+  min-height: 100vh;
+}
+
+.login-page .form-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
 @media screen and (min-width: 1168px) {
 
   main {

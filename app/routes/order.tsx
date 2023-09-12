@@ -17,6 +17,7 @@ import { z, ZodError } from "zod";
 import WiredComponent from "~/components/WiredComponent";
 import TDLogo from "~/components/TDLogo";
 import OrderConfirmation from "~/components/OrderConfirmation";
+import { createOrder } from "~/models/orders.server";
 
 const formDataSchema = z.object({
   name: z.string().min(3).max(50),
@@ -48,7 +49,10 @@ export async function action({ request }: ActionArgs) {
 
     formDataSchema.parse(order);
 
-    return json({ order });
+    // insert order into db
+    const newOrder = await createOrder(order);
+
+    return json({ order: newOrder });
   } catch (error) {
     if (error instanceof ZodError) {
       // Handle validation errors
