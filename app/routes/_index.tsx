@@ -70,7 +70,7 @@ function Index() {
               <Link to="/login" className="btn btn--green">
                 Login
               </Link>
-              <Link to="/order" className="btn btn--green">
+              <Link to="/order" className="btn">
                 Order Coffee
               </Link>
             </>
