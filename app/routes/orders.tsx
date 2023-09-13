@@ -24,7 +24,7 @@ export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const orderId = formData.get("order-id");
 
-  await updateOrder(orderId, { complete: true });
+  await updateOrder(parseInt(orderId), { complete: true });
   const allOrders = await getOrders();
   return json({ allOrders });
 };
@@ -50,15 +50,18 @@ export default function Order() {
     if (!socket) return;
     // console.log(d)
     socket.on("order", (data) => {
-      console.log(data);
-      const newOrders = [...orders, data];
+      const newOrders = [...orders];
+      newOrders.push(data);
       sortOrdersByCompleted(newOrders);
       setOrders(newOrders);
     });
-
+    if (actionData?.allOrders) {
     const sortedOrders = sortOrdersByCompleted(orders);
     setOrders(actionData?.allOrders || [...sortedOrders]);
-  }, [socket, actionData]);
+    }
+  }, [socket,orders, actionData]);
+
+  
 
   console.log({ orders });
 
@@ -72,7 +75,8 @@ export default function Order() {
             <motion.li key={order.id} className={order.complete ? `complete` : ''} >
               <div className="order-for">
                 <p>
-                  <strong>Order For:</strong> {order.name}
+                  <strong>Order For:</strong> {order.name}<br />
+                  <small>Order #: {order.id}</small>
                 </p>
               </div>
               <div className="order-details">
