@@ -160,7 +160,7 @@ export default function Order() {
                 )}
             </div>
           </div>
-          {/* customize coffee: Drip Cofee, Latte, Cappucino, Espresso Shot */}
+          {/* customize coffee: Drip Cofee, Latte, Cappuccino, Espresso Shot */}
           <div className="form-group">
             <div className="form-group-label grid">
               <p className="number">3</p>
@@ -175,12 +175,12 @@ export default function Order() {
                   <input type="radio" name="coffee" id="latte" value="latte" />
                 </label>
                 <label htmlFor="cappucino">
-                  Cappucino
+                  Cappuccino
                   <input
                     type="radio"
                     name="coffee"
                     id="cappucino"
-                    value="cappucino"
+                    value="cappuccino"
                   />
                 </label>
                 <label htmlFor="espresso">
