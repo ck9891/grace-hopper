@@ -64,6 +64,6 @@ EXPOSE 3000
 ENV DATABASE_URL="file:./data/sqlite.db"
 RUN npx prisma migrate deploy
 RUN npx prisma generate
-RUN npx prisma db seed
+# RUN npx prisma db seed
 
 CMD [ "npm", "run", "start" ]
