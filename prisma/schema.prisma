@@ -33,11 +33,20 @@ model Order {
   createdAt DateTime @default(now())
 
   name String
-  email String
   temperature String
   coffee String
   milk String
   syrup String
   complete Boolean @default(false)
+}
+
+model Answer {
+
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+
+  question String
+  answer String
 }
 

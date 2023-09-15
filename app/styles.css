@@ -474,6 +474,76 @@ text-align: center;
   margin: 0 auto;
 }
 
+/* survey */
+
+.survey {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--light-green);
+  min-height: 100vh;
+}
+
+.survey .form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  gap: var(--spacing-md);
+  margin-bottom: 3rem;
+}
+.survey h1 {
+  font-size: 3rem;
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-semibold);
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+.survey h2 {
+  /* font-size: var(--font-size-lg); */
+  text-align: center;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  background: var(--td-green);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.circle:hover {
+  opacity: 0.6;
+}
+
+.circle.red {
+  background: #ff0000;
+}
+
+.circle.light-red {
+  background: #ff7f7f;
+}
+
+.circle.yellow {
+  background: #f2e600;
+}
+
+.circle.light-green {
+  background: #5CCD6B;
+}
+
+.circle.green {
+  background: var(--td-green);
+}
+
 @media screen and (min-width: 1168px) {
   .logo {
     width: 300px;

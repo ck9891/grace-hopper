@@ -45,8 +45,8 @@ function Admin() {
             <p>{data.stats[1]}</p>
           </div> */}
         </div>
-        <a href="/get-users" className="btn">
-          Download Users
+        <a href="/get-answers" className="btn">
+          Download Responses
         </a>
         <Form method="post">
           <input type="hidden" name="form" value="deleteAllOrders" />

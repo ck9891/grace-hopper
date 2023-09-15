@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 import { motion } from "framer-motion";
 import TDLogo from "./TDLogo";
 
-function OrderConfirmation({ orderNumber }) {
+function OrderConfirmation({ orderNumber }: { orderNumber: string }) {
   return (
 
     <motion.div className="order-confirmation"  initial={{opacity: 0}} animate={{opacity: 1}}>

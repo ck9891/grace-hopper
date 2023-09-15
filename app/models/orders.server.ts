@@ -26,16 +26,16 @@ export async function deleteOrders() {
   return prisma.order.deleteMany();
 } 
 
-export async function getOrdersEmail() {
+// export async function getOrdersEmail() {
 
-  // get unique emails
-  const details = await prisma.order.findMany({
-    select: {
-      email: true,
-      name: true,
-    },
-    distinct: ['email']
-  });
+//   // get unique emails
+//   const details = await prisma.order.findMany({
+//     select: {
+//       email: true,
+//       name: true,
+//     },
+//     distinct: ['email']
+//   });
 
-  return details
-}
+//   return details
+// }

@@ -23,7 +23,6 @@ import { createOrder } from "~/models/orders.server";
 
 const formDataSchema = z.object({
   name: z.string().min(3).max(50),
-  email: z.string().email(),
   temperature: z.enum(["hot", "iced"]),
   coffee: z.enum(["drip", "latte", "cappuccino", "espresso"]),
   milk: z.enum([
@@ -119,13 +118,6 @@ export default function Order() {
                   <input type="text" name="name" id="name" />
                   {data?.validationErrors?.name && (
                     <p className="error">{data?.validationErrors?.name[0]}</p>
-                  )}
-                </label>
-                <label className="text-input" htmlFor="email">
-                  Email
-                  <input type="email" name="email" id="email" />
-                  {data?.validationErrors?.email && (
-                    <p className="error">{data?.validationErrors?.email[0]}</p>
                   )}
                 </label>
                 

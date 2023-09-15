@@ -1,6 +1,5 @@
-import { getUser, requireUser } from "~/session.server";
-import { redirect } from "@remix-run/node";
-import { getOrdersEmail } from "~/models/orders.server";
+import { requireUser } from "~/session.server";
+import { getAnswers } from "~/models/survey.server";
 
 // require json-2-csv module
 const converter = require('json-2-csv')
@@ -9,7 +8,7 @@ export async function loader({ request }) {
   
   await requireUser(request);
 
-  const report = await getOrdersEmail();
+  const report = await getAnswers();
   console.log(report)
   try {
     const csv = await converter.json2csv(report)
