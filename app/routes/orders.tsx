@@ -13,7 +13,7 @@ import { getOrders, updateOrder } from "~/models/orders.server";
 import { requireUser } from "~/session.server";
 
 export const loader = async ({request}) => {
-  await requireUser(request);
+  // await requireUser(request);
   // get orders from db
   const orders = await getOrders();
   return json({ existingOrders: orders });
@@ -26,6 +26,7 @@ export const action = async ({ request }: ActionArgs) => {
 
   await updateOrder(parseInt(orderId), { complete: true });
   const allOrders = await getOrders();
+  console.log({allOrders})
   return json({ allOrders });
 };
 
@@ -100,6 +101,12 @@ export default function Order() {
                   <strong>Syrup</strong>: {order.syrup}
                   <small>
                     Options Available: (Vanilla, Caramel, Mocha, No Syrup)
+                  </small>
+                </p>
+                <p>
+                  <strong>Donut</strong>: {order?.donut ? order.donut : "No Donut"}
+                  <small>
+                    Options Available: (Vanilla Sprinkle, TD Green Frosted, Coffee Flavored w/ Chocolate Sprinkles, No Donut)
                   </small>
                 </p>
                 {!order?.complete ? (

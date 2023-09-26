@@ -14,7 +14,6 @@ import { useEffect } from "react";
 import { json, redirect } from "@remix-run/node";
 import { useSocket } from "~/context";
 import { motion } from "framer-motion";
-import OrderForm from "~/components/OrderForm";
 import { z, ZodError } from "zod";
 import WiredComponent from "~/components/WiredComponent";
 import TDLogo from "~/components/TDLogo";
@@ -23,17 +22,6 @@ import { createOrder } from "~/models/orders.server";
 
 const formDataSchema = z.object({
   name: z.string().min(3).max(50),
-  temperature: z.enum(["hot", "iced"]),
-  coffee: z.enum(["drip", "latte", "cappuccino", "espresso"]),
-  milk: z.enum([
-    "whole milk",
-    "skim milk",
-    "soy milk",
-    "almond",
-    "oat",
-    "no milk",
-  ]),
-  syrup: z.enum(["vanilla", "caramel", "mocha", "no syrup"]),
 });
 export async function action({ request }: ActionArgs) {
   try {
@@ -41,11 +29,11 @@ export async function action({ request }: ActionArgs) {
 
     const order = {
       name: form.get("name"),
-      email: form.get("email"),
       temperature: form.get("temperature"),
       coffee: form.get("coffee"),
       milk: form.get("milk"),
       syrup: form.get("syrup"),
+      donut: form.get("donut"),
     };
 
     formDataSchema.parse(order);
@@ -96,12 +84,11 @@ export default function Order() {
   }
 
   return (
-    <motion.main initial={{opacity: 0}} animate={{opacity: 1}}>
+    <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <div className="container">
         <section className="title-section">
           <TDLogo />
           <WiredComponent />
-          <p>Include disclaimer on why we need their email address.</p>
         </section>
         <Form method="post" className="order-form">
           {/* get name and email address */}
@@ -109,8 +96,8 @@ export default function Order() {
             <div className="form-group-label grid">
               <p className="number">1</p>
               <p>
-                Please provide your name and e-mail address in order to receive
-                a free coffee.
+                Please provide your name in order to receive
+                a free coffee and/or donut.
               </p>
               <div className="form-control">
                 <label className="text-input" htmlFor="name">
@@ -120,7 +107,6 @@ export default function Order() {
                     <p className="error">{data?.validationErrors?.name[0]}</p>
                   )}
                 </label>
-                
               </div>
             </div>
           </div>
@@ -145,11 +131,7 @@ export default function Order() {
                     value="iced"
                   />
                 </label>
-                
               </div>
-              {data?.validationErrors?.temperature && (
-                  <p className="error" >{data?.validationErrors?.temperature[0].split('|').toString()}</p>
-                )}
             </div>
           </div>
           {/* customize coffee: Drip Cofee, Latte, Cappuccino, Espresso Shot */}
@@ -184,11 +166,7 @@ export default function Order() {
                     value="espresso"
                   />
                 </label>
-                
               </div>
-              {data?.validationErrors?.coffee && (
-                  <p className="error">{data?.validationErrors?.coffee[0].split('|').toString()}</p>
-                )}
             </div>
           </div>
           {/* get milk options */}
@@ -235,11 +213,7 @@ export default function Order() {
                   No Milk
                   <input type="radio" name="milk" id="noMilk" value="no milk" />
                 </label>
-                
               </div>
-              {data?.validationErrors?.milk && (
-                  <p className="error">{data?.validationErrors?.milk[0].split('|').toString()}</p>
-                )}
             </div>
           </div>
           {/* get syrup options */}
@@ -278,11 +252,53 @@ export default function Order() {
                     value="no syrup"
                   />
                 </label>
-                
               </div>
-              {data?.validationErrors?.syrup && (
-                  <p className="error">{data?.validationErrors?.syrup[0].split('|').toString()}</p>
-                )}
+
+            </div>
+          </div>
+          {/* get donut options */}
+          <div className="form-group">
+            <div className="form-group-label grid">
+              <p className="number">6</p> <p>Choose a Donut</p>
+              <div className="form-control radio-group">
+                <label htmlFor="vanillaDonut">
+                  Vanilla Sprinkle
+                  <input
+                    type="radio"
+                    name="donut"
+                    id="vanillaDonut"
+                    value="Vanilla Sprinkle"
+                  />
+                </label>
+                <label htmlFor="tdGreenFrosted">
+                  TD Green Frosted
+                  <input
+                    type="radio"
+                    name="donut"
+                    id="tdGreenFrosted"
+                    value="TD Green Frosted"
+                  />
+                </label>
+                <label htmlFor="noDonut">
+                  No Donut
+                  <input
+                    type="radio"
+                    name="donut"
+                    id="noDonut"
+                    value="no donut"
+                  />
+                </label>
+                <label htmlFor="coffeeFlavoured" className="two-col">
+                  Coffee Flavored w/ Chocolate Sprinkles
+                  <input
+                    type="radio"
+                    name="donut"
+                    id="coffeeFlavoured"
+                    value="Coffee Flavored w/ Chocolate Sprinkles"
+                  />
+                </label>
+              </div>
+
             </div>
           </div>
           <input type="submit" value="Submit" className="btn" />

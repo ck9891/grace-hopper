@@ -18,7 +18,7 @@ import { SocketProvider } from "~/context";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Grace Hopperr Coffee Ordering",
+  title: "Grace Hopper Coffee Ordering",
   viewport: "width=device-width,initial-scale=1",
 });
 

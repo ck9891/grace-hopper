@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -33,10 +33,11 @@ model Order {
   createdAt DateTime @default(now())
 
   name String
-  temperature String
-  coffee String
-  milk String
-  syrup String
+  temperature String?
+  coffee String?
+  milk String?
+  syrup String?
+  donut String?
   complete Boolean @default(false)
 }
 

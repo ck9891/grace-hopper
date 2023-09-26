@@ -12,7 +12,6 @@ export const loader = async ({ request }) => {
 
 function Index() {
   const { userId } = useLoaderData();
-  console.log(userId)
   return (
     <div className="index">
       <TDLogo />

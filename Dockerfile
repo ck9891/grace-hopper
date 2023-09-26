@@ -50,8 +50,7 @@ RUN apt-get update -qq && \
 COPY --from=build /app /app
 ENV DATABASE_URL=postgres://coffee_order:pQ5Xc2JFwaUgY5Z@coffee-order-db.flycast:5432/coffee_order?sslmode=disable
 RUN npx prisma generate
-RUN npx prisma db push
-RUN npx prisma db seed 
+# RUN npx prisma db push --accept-data-loss
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD [ "npm", "run", "start" ]
